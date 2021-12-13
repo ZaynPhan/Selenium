@@ -149,11 +149,7 @@ public class ExerciseWebElement {
                 "To Manager's Page of Guru99 Bank\"]"));
 
         //Check welcome message displayed
-        welcomeMessage.isDisplayed();
-
-        //Check content welcome message
-        String welcomeMessageText = welcomeMessage.getText();
-        Assert.assertEquals(welcomeMessageText, "Welcome To Manager's Page of Guru99 Bank");
+        Assert.assertTrue(welcomeMessage.isDisplayed());
     }
 
     @Test
