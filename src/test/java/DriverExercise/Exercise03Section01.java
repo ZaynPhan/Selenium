@@ -1,6 +1,7 @@
 package DriverExercise;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -63,13 +64,15 @@ public class Exercise03Section01 {
 
         //Find element Radio Box trên Navigation bar
         WebElement radioButton = driver.findElement(By.xpath("//span[text()='Radio Button']"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", radioButton);
+
         Assert.assertTrue(radioButton.isDisplayed());
-        radioButton.click();
 
         //Check content của trang Radio
-        WebElement radioButtonText = driver.findElement(By.xpath("//span[text()='Radio Button']"));
-
-        Assert.assertEquals(radioButtonText, "Do you like the site?");
+        WebElement radioButtonText = driver.findElement(By.xpath("//div[text()='Do you like the site?']"));
+        String radioQuestion = radioButtonText.getText();
+        Assert.assertEquals(radioQuestion, "Do you like the site?");
 
         //Check checkbox Yes is displayed
         WebElement checkboxYes = driver.findElement(By.xpath("//label[@for='yesRadio']"));
@@ -80,7 +83,7 @@ public class Exercise03Section01 {
         //Find and check following message Yes
         WebElement successMessageYes = driver.findElement(By.xpath("//p[text()='You have selected ']"));
         String messageYes = successMessageYes.getText().trim();
-        Assert.assertEquals(messageYes, "You have selected");
+        Assert.assertEquals(messageYes, "You have selected Yes");
         Thread.sleep(1500);
 
         //Check checkbox Impressive is displayed
@@ -92,11 +95,11 @@ public class Exercise03Section01 {
         //Find and check following message Impressive
         WebElement successMessageImpressive = driver.findElement(By.xpath("//p[text()='You have selected ']"));
         String messageImpressive = successMessageImpressive.getText().trim();
-        Assert.assertEquals(messageImpressive, "You have selected");
+        Assert.assertEquals(messageImpressive, "You have selected Impressive");
         Thread.sleep(1500);
 
         //Check checkbox No is NOT enabled
-        WebElement checkboxNo = driver.findElement(By.xpath("//label[@for='noRadio']"));
+        WebElement checkboxNo = driver.findElement(By.xpath("//input[@id='noRadio']"));
         Assert.assertFalse(checkboxNo.isEnabled());
     }
 
