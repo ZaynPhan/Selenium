@@ -67,7 +67,8 @@ public class Exercise03Section01 {
         radioButton.click();
 
         //Check content của trang Radio
-        String radioButtonText = radioButton.getText();
+        WebElement radioButtonText = driver.findElement(By.xpath("//span[text()='Radio Button']"));
+
         Assert.assertEquals(radioButtonText, "Do you like the site?");
 
         //Check checkbox Yes is displayed
