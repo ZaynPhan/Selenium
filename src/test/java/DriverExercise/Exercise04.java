@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -155,38 +156,66 @@ Step 4: Kiểm tra title của web hiện tại là: Lịch thi đấu Bóng Đ�
 
     /*
     Exercise 5: Drag and Drop action
-    Step 1 - Truy cập vào trang: https://jqueryui.com/resources/demos/droppable/default.html
-    Step 2 - Kéo hình chữ nhật: “Drag me to my target” đến hình chữ nhật “Drop here”
-    Step 3 - Verify text của hình chữ nhật “Drop here” ban đầu đã thay đổi thành “Dropped!”
+Step 1: Assert chữ: “Drag the small circle here.” được hiển thị
+Step 2: Kéo hình tròn màu xanh lên trên vòng tròn lớn
+Step 3: Assert chữ “You did great!” được hiển thị khi drag and drop thành công
      */
-    @Test
-    public void testcaseDragAndDrop() throws InterruptedException {
-        driver.get("https://jqueryui.com/resources/demos/droppable/default.html");
-        driver.manage().window().maximize();
-
-        //Check text 'Drop here' is displayed
-        WebElement dropHereText = driver.findElement(By.xpath("//p[text()='Drop here']"));
-        Assert.assertTrue(dropHereText.isDisplayed());
-
-        //Kéo hình chữ nhật: “Drag me to my target” đến hình chữ nhật “Drop here”
-        WebElement dragRectangle = driver.findElement(By.xpath("//div[@id='draggable']"));
-        WebElement dropRectangle = driver.findElement(By.xpath("//div[@id='droppable']"));
-        Actions dragAndDrop = new Actions(driver);
-        dragAndDrop.clickAndHold(dragRectangle).moveToElement(dropRectangle).release(dropRectangle).build();
-        dragAndDrop.perform();
-        Thread.sleep(1500);
-
-        //Check Drop success?
-        WebElement highlightElement = driver.findElement(By.xpath("//div[@class='ui-widget-header ui-droppable ui-state-highlight']"));
-        Assert.assertTrue(highlightElement.isDisplayed());
-
-        //Verify text của hình chữ nhật “Drop here” ban đầu đã thay đổi thành “Dropped!”
-        Assert.assertFalse(dropHereText.isDisplayed());
-
-        WebElement droppedText = driver.findElement(By.xpath("//p[text()='Dropped!']"));
-        Assert.assertTrue(droppedText.isDisplayed());
-    }
-
+//    @Test
+//    public void testcaseDragAndDrop() throws InterruptedException {
+//        driver.get("https://demos.telerik.com/kendo-ui/dragdrop/angular");
+//        driver.manage().window().maximize();
+//
+//        //Check text 'Drag the small circle here.' is displayed
+//        WebElement dragHereText = driver.findElement(By.xpath("//div[text()='Drag the small circle here.']"));
+//        Assert.assertTrue(dragHereText.isDisplayed());
+//
+//        //Kéo hình tròn màu xanh lên trên vòng tròn lớn
+//        WebElement dragCircle = driver.findElement(By.xpath("//div[@id='draggable']"));
+//        WebElement dropCircle = driver.findElement(By.xpath("//div[@id='droptarget']"));
+//        Actions builder = new Actions(driver);
+//        Action dragAndDrop = builder.clickAndHold(dragCircle).moveToElement(dropCircle).release(dropCircle).build();
+//        dragAndDrop.perform();
+//        Thread.sleep(1500);
+//
+//        //Check Drop success?
+////        WebElement highlightElement = driver.findElement(By.xpath("//div[@class='ui-widget-header ui-droppable ui-state-highlight']"));
+////        Assert.assertTrue(highlightElement.isDisplayed());
+//
+//        //Verify text của hình chữ nhật “Drop here” ban đầu đã thay đổi thành “Dropped!”
+//        WebElement successText = driver.findElement(By.xpath("//div[text()='You did great!']"));
+//        Assert.assertTrue(successText.isDisplayed());
+//    }
+//
+//    @Test
+//    public void Testscript05_TC01_dragAndDrop() throws Exception {
+//
+//        driver.get("http://demos.telerik.com/kendo-ui/dragdrop/angular");
+//        driver.manage().window().maximize();
+//
+//        WebElement dragFrom = driver.findElement(By.xpath("//div[@id='draggable']"));
+//        WebElement target = driver.findElement(By.xpath("//div[@id='droptarget']"));
+//        Actions builder = new Actions(driver);
+//        Action dragAndDrop = builder.clickAndHold(dragFrom).moveToElement(target).release(target).build();
+//        dragAndDrop.perform();
+//        Assert.assertEquals("You did great!", target.getText());
+//    }
+//
+//    @Test
+//    public void Testscript05_TC02_dragAndDrop() throws Exception {
+//
+//        driver.get("http://jqueryui.com/resources/demos/droppable/default.html");
+//        driver.manage().window().maximize();
+//
+//        WebElement dragFrom = driver
+//                .findElement(By.xpath("//div[@class='ui-widget-content ui-draggable ui-draggable-handle']"));
+//        WebElement target = driver.findElement(By.xpath("//div[@class='ui-widget-header ui-droppable']"));
+//        WebElement text = driver.findElement(By.xpath("//div[@class='ui-widget-header ui-droppable']/p"));
+//
+//        Actions builder = new Actions(driver);
+//        Action dragAndDrop = builder.clickAndHold(dragFrom).moveToElement(target).release(target).build();
+//        dragAndDrop.perform();
+//        Assert.assertEquals("Dropped!", text.getText());
+//    }
     /*
     Exercise 6: Keyboard action
     Step 1: Vào trang: http://demo.guru99.com/v4/
@@ -261,7 +290,6 @@ Step 4: Kiểm tra title của web hiện tại là: Lịch thi đấu Bóng Đ�
         clearCacheBrowser.sendKeys(Keys.chord(Keys.LEFT_CONTROL, Keys.chord(Keys.LEFT_SHIFT, "R")));
         Thread.sleep(2000);
     }
-
 
     @AfterClass
     public void afterClass() {
