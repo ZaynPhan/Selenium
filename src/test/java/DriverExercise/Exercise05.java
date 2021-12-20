@@ -1,8 +1,10 @@
 package DriverExercise;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -14,21 +16,23 @@ import java.util.Set;
 
 public class Exercise05 {
     WebDriver driver;
+
     @BeforeClass
-    public void beforeTestcaseIframe(){
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Driver/chromedriver.exe" );
+    public void beforeTestcaseIframe() {
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Driver/chromedriver.exe");
         driver = new ChromeDriver();
     }
-/*
-Exercise 2: Tương tác với iframe
-Step 1: Vào trang: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_input_disabled
-Step 2: Kiểm tra textbox Last name là disable
-Step 3: Input giá trị “nguyen” vào textbox: First name
-Step 4: Click button submit
-Step 5: Kiểm tra message hiển thị là “fname=nguyen”
- */
+
+    /*
+    Exercise 2: Tương tác với iframe
+    Step 1: Vào trang: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_input_disabled
+    Step 2: Kiểm tra textbox Last name là disable
+    Step 3: Input giá trị “nguyen” vào textbox: First name
+    Step 4: Click button submit
+    Step 5: Kiểm tra message hiển thị là “fname=nguyen”
+     */
     @Test
-    public void testcaseIframe01(){
+    public void testcaseIframe01() {
         //1. Vào trang w3schools
         driver.get("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_input_disabled");
         driver.manage().window().maximize();
@@ -62,17 +66,17 @@ Step 5: Kiểm tra message hiển thị là “fname=nguyen”
         String actualResultSize = resultSize.getText();
         Assert.assertEquals(actualResultSize, "Result Size: 668 x 457");
     }
-/*
-Step 1: Truy cập trang web: :"https://www.adidas.com.vn/vi/help.html"
-Step 2: Check dòng text: "HỖ TRỢ CỬA HÀNG TRỰC"
-Step 3: Scroll xuống cuối trang
-Step 4: Click vào logo Đã thông báo Bộ công thương
-Step 5: Check dòng text "Công ty TNHH adidas Việt Nam" được hiển thị
-Step 6: Đóng trang "Bộ công thương"
-Step 7: Kiểm tra 1 element trên trang Bộ công thương
- */
+
+    /*
+    Step 1: Truy cập trang web: :"https://www.adidas.com.vn/vi/help.html"
+    Step 2: Check dòng text: "HỖ TRỢ CỬA HÀNG TRỰC"
+    Step 3: Scroll xuống cuối trang
+    Step 4: Click vào logo Đã thông báo Bộ công thương
+    Step 5: Check dòng text "Công ty TNHH adidas Việt Nam" được hiển thị
+    Step 6: Đóng trang "Bộ công thương"
+     */
     @Test
-    public void tc (){
+    public void testcaseWindows() {
         //1. Vào trang CSKH adidas
         driver.get("https://www.adidas.com.vn/vi/help.html");
         driver.manage().window().maximize();
@@ -81,10 +85,10 @@ Step 7: Kiểm tra 1 element trên trang Bộ công thương
         //2. Check dòng text: "HỖ TRỢ CỬA HÀNG TRỰC"
         WebElement headerText = driver.findElement(By.xpath("//h1[text()='Hỗ Trợ Cửa Hàng Trực']"));
         String actualHeaderText = headerText.getText();
-        Assert.assertEquals(actualHeaderText, "Hỗ Trợ Cửa Hàng Trực");
+        Assert.assertEquals(actualHeaderText, "HỖ TRỢ CỬA HÀNG TRỰC");
 
         //3. Scroll xuống cuối trang
-        Actions scrollDown  = new Actions(driver);
+        Actions scrollDown = new Actions(driver);
         scrollDown.sendKeys(Keys.PAGE_DOWN);
         scrollDown.sendKeys(Keys.PAGE_DOWN);
 
@@ -93,8 +97,8 @@ Step 7: Kiểm tra 1 element trên trang Bộ công thương
         AnouncementLogo.click();
 
         //4.5 Switch qua tab "Thông tin website thương mại điện tử"
-        String parentID = driver.getWindowHandle(); //lấy title của 1 window hiện tại
-        switchToWindowByTitle(parentID);
+//        switchToWindowByTitle("Thông tin website thương mại điện tử - Online.Gov.VN");
+        switchToWindowByIndex(1);
 
         //5. Check dòng text "Công ty TNHH adidas Việt Nam" được hiển thị
         WebElement companyNameText = driver.findElement(By.xpath("//p[text()='Tên Doanh nghiệp:']/ancestor::div/following-sibling::div[@class='col-xs-6']"));
@@ -105,18 +109,8 @@ Step 7: Kiểm tra 1 element trên trang Bộ công thương
         driver.close();
 
         //Chuyển về trang CSKH adidas
-        driver.switchTo().window(adidasTitle);
-
-        //7. Kiểm tra 1 element trên trang Bộ công thương
-        WebElement subTitleEcommerce = driver.findElement(By.xpath("//h1[text()='Thông tin Website thương mại điện tử']"));
-        boolean titleIsDisplayed = subTitleEcommerce.isDisplayed();
-        try {
-            Assert.assertFalse(titleIsDisplayed);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        switchToWindowByTitle(adidasTitle);
     }
-
 
     public void switchToWindowByTitle(String title) {
         Set<String> allWindows = driver.getWindowHandles();
@@ -129,8 +123,13 @@ Step 7: Kiểm tra 1 element trên trang Bộ công thương
         }
     }
 
+    public void switchToWindowByIndex(int index) {
+        Set<String> allWindows = driver.getWindowHandles();
+        driver.switchTo().window((String) allWindows.toArray()[index]);
+    }
+
     @AfterClass
-    public void afterTestcaseIframe(){
+    public void afterTestcaseIframe() {
         driver.quit();
     }
 }

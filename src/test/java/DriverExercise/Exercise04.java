@@ -160,32 +160,36 @@ Step 1: Assert chữ: “Drag the small circle here.” được hiển thị
 Step 2: Kéo hình tròn màu xanh lên trên vòng tròn lớn
 Step 3: Assert chữ “You did great!” được hiển thị khi drag and drop thành công
      */
-//    @Test
-//    public void testcaseDragAndDrop() throws InterruptedException {
-//        driver.get("https://demos.telerik.com/kendo-ui/dragdrop/angular");
-//        driver.manage().window().maximize();
-//
-//        //Check text 'Drag the small circle here.' is displayed
-//        WebElement dragHereText = driver.findElement(By.xpath("//div[text()='Drag the small circle here.']"));
-//        Assert.assertTrue(dragHereText.isDisplayed());
-//
-//        //Kéo hình tròn màu xanh lên trên vòng tròn lớn
-//        WebElement dragCircle = driver.findElement(By.xpath("//div[@id='draggable']"));
-//        WebElement dropCircle = driver.findElement(By.xpath("//div[@id='droptarget']"));
-//        Actions builder = new Actions(driver);
+    @Test
+    public void testcaseDragAndDrop() throws InterruptedException {
+        driver.get("https://demos.telerik.com/kendo-ui/dragdrop/angular");
+        driver.manage().window().maximize();
+
+        //Check text 'Drag the small circle here.' is displayed
+        WebElement dragHereText = driver.findElement(By.xpath("//div[text()='Drag the small circle here.']"));
+        Assert.assertTrue(dragHereText.isDisplayed());
+
+        //Kéo hình tròn màu xanh lên trên vòng tròn lớn
+        WebElement dragCircle = driver.findElement(By.xpath("//div[@id='draggable']"));
+        WebElement dropCircle = driver.findElement(By.xpath("//div[@id='droptarget']"));
+        Actions builder = new Actions(driver);
 //        Action dragAndDrop = builder.clickAndHold(dragCircle).moveToElement(dropCircle).release(dropCircle).build();
 //        dragAndDrop.perform();
-//        Thread.sleep(1500);
-//
-//        //Check Drop success?
-////        WebElement highlightElement = driver.findElement(By.xpath("//div[@class='ui-widget-header ui-droppable ui-state-highlight']"));
-////        Assert.assertTrue(highlightElement.isDisplayed());
-//
-//        //Verify text của hình chữ nhật “Drop here” ban đầu đã thay đổi thành “Dropped!”
-//        WebElement successText = driver.findElement(By.xpath("//div[text()='You did great!']"));
-//        Assert.assertTrue(successText.isDisplayed());
-//    }
-//
+        for (int i = 0; i < 8; i++) {
+            builder.sendKeys(Keys.ARROW_DOWN);
+        }
+        builder.dragAndDrop(dragCircle,dropCircle).build().perform();
+        Thread.sleep(1500);
+
+        //Check Drop success?
+//        WebElement highlightElement = driver.findElement(By.xpath("//div[@class='ui-widget-header ui-droppable ui-state-highlight']"));
+//        Assert.assertTrue(highlightElement.isDisplayed());
+
+        //Verify text của hình chữ nhật “Drop here” ban đầu đã thay đổi thành “Dropped!”
+        WebElement successText = driver.findElement(By.xpath("//div[text()='You did great!']"));
+        Assert.assertTrue(successText.isDisplayed());
+    }
+
 //    @Test
 //    public void Testscript05_TC01_dragAndDrop() throws Exception {
 //
