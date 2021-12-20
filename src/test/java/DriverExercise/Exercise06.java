@@ -99,27 +99,6 @@ Step 04 - Nhập vào text “VuNguyen”và verify message hiển thị tại R
         Assert.assertEquals(actualInputMessage.trim(), "You entered:");
     }
 
-    /*
-    Exercise 04: Tương tác với javascript( sử dụng javascript: Thay thế các hàm click của selenium bằng Javascript click)
-Step 01 - Truy cập vào trang: http://live.guru99.com/
-Step 02 - Vào trang đăng nhập: http://live.guru99.com/index.php/customer/account/
-Click MY ACCOUNT link
-Step 03 - Click CREATE AN ACCOUNT button
-Step 04 - Nhập thông tin hợp lệ vào tất cả các field: First Name/ Last Name/ Email Address/ Password/ Confirm Password
-(Lưu ý: Tạo random cho dữ liệu tại field Email Address)
-Step 05 - Verify message xuất hiện khi đăng kí thành công: Thank you for registering with Main Website Store.
-Step 06 – Click account -> Log out
-Step 07: Login hệ thống với tài khoản vừa tạo:
--	Click my account
--	Nhập username, password vừa tạo -> Click Log In
-Step 08: Kiểm tra login thành công với url hiện tại là: http://live.guru99.com/index.php/customer/account
-
-     */
-    @Test
-    public void testcaseAlert04(){
-
-    }
-
     @AfterClass
     public void afterTestcaseAlert(){
         driver.quit();
