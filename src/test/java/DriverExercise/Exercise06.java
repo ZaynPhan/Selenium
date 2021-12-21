@@ -8,7 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Exercise06 {
+public class Exercise06 extends Common {
     WebDriver driver;
 
     @BeforeClass
@@ -102,15 +102,5 @@ Step 04 - Nhập vào text “VuNguyen”và verify message hiển thị tại R
     @AfterClass
     public void afterTestcaseAlert(){
         driver.quit();
-    }
-
-    public void loadBrowser (){
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Driver/chromedriver.exe");
-        driver = new ChromeDriver();
-    }
-
-    public void inputURL (String URL){
-        driver.get(URL);
-        driver.manage().window().maximize();
     }
 }
