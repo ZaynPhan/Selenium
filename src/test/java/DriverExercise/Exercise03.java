@@ -25,7 +25,7 @@ Step 09 – Click vào radio box No
 Step 10 – Check btn No is disabled
  */
 
-public class Exercise03Section01 {
+public class Exercise03 {
     WebDriver driver;
 
     @BeforeClass
