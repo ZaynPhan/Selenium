@@ -2,7 +2,6 @@ package DriverExercise;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -10,12 +9,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.Set;
 
-
-public class Exercise05 {
-    WebDriver driver;
+public class Exercise05 extends Common{
 
     @BeforeClass
     public void beforeTestcaseIframe() {
@@ -121,11 +117,6 @@ public class Exercise05 {
                 break;
             }
         }
-    }
-
-    public void switchToWindowByIndex(int index) {
-        Set<String> allWindows = driver.getWindowHandles();
-        driver.switchTo().window((String) allWindows.toArray()[index]);
     }
 
     @AfterClass

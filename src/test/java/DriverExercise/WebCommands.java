@@ -8,7 +8,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 
 public class WebCommands {
     WebDriver driver;
@@ -16,11 +15,8 @@ public class WebCommands {
     public void beforeClass() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/Driver/chromedriver.exe");
         driver = new ChromeDriver(); //mở browser
-//        Thread.sleep(3000);
         driver.get("http://demo.guru99.com/v4/"); //truy cập link
-//        Thread.sleep(3000);
         driver.manage().window().maximize(); //phóng to
-//        Thread.sleep(3000);
     }
 
     @Test

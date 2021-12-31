@@ -16,7 +16,6 @@ import java.awt.event.KeyEvent;
 
 
 public class Exercise07 extends Common {
-//    WebDriver driver;
 
     @BeforeClass
     public void beforeTestcaseAlert() {
