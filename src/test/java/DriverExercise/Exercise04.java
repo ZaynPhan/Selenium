@@ -5,8 +5,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -256,13 +257,14 @@ Step 3: Assert chữ “You did great!” được hiển thị khi drag and dro
         //Check 2 warning message is displayed
         userNameTextField.click();
         passwordTextField.click();
-        Thread.sleep(1500);
         WebElement userNameWarningMessage = driver.findElement(By.xpath("//label[@id='message23']"));
+        waitForElement(10, "//label[@id='message23']");
         Assert.assertTrue(userNameWarningMessage.isDisplayed());
 
         userNameTextField.click();
-        Thread.sleep(1500);
+
         WebElement passwordWarningMessage = driver.findElement(By.xpath("//label[@id='message18']"));
+        waitForElement(15, "//label[@id='message18']");
         Assert.assertTrue(passwordWarningMessage.isDisplayed());
 
         //Input username và password: mngr373193/sutEjYq
@@ -292,7 +294,11 @@ Step 3: Assert chữ “You did great!” được hiển thị khi drag and dro
         //Bấm tổ hợp phím clear cache browser: Ctrl + Shift + R
         Actions clearCacheBrowser = new Actions(driver);
         clearCacheBrowser.sendKeys(Keys.chord(Keys.LEFT_CONTROL, Keys.chord(Keys.LEFT_SHIFT, "R")));
-        Thread.sleep(2000);
+    }
+
+    public void waitForElement(int seconds, String waitConditionLocator) {
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(waitConditionLocator)));
     }
 
     @AfterClass

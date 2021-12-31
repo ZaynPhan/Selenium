@@ -1,7 +1,9 @@
 package DriverExercise;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -15,6 +17,7 @@ public class Exercise06 extends Common {
     public void beforeTestcaseAlert() {
         loadBrowser();
     }
+
     /*
     Exercise 01: Tương tác với Alert thông thường
     Step 01 - Truy cập vào trang: http://the-internet.herokuapp.com/javascript_alerts
@@ -23,7 +26,7 @@ public class Exercise06 extends Common {
     Step 04 - Accept alert và verify message hiển thị tại Result là:  You clicked an alert successfully
         */
     @Test
-    public void testcaseAlert01(){
+    public void testcaseAlert01() {
         //Input URL
         inputURL("http://the-internet.herokuapp.com/javascript_alerts");
 
@@ -42,15 +45,16 @@ public class Exercise06 extends Common {
         String actualSuccessMessage = successMessage.getText();
         Assert.assertEquals(actualSuccessMessage.trim(), "You successfully clicked an alert");
     }
-/*
-Exercise 02: Tương tác với Alert Confirm
-Step 01 - Truy cập vào trang: http://the-internet.herokuapp.com/javascript_alerts
-Step 02 - Click vào button: Click for JS Confirm
-Step 03 - Verify message hiển thị trong alert là: I am a JS Confirm
-Step 04 - Cancel alert và verify message hiển thị tại Result là:  You clicked: Cancel
- */
+
+    /*
+    Exercise 02: Tương tác với Alert Confirm
+    Step 01 - Truy cập vào trang: http://the-internet.herokuapp.com/javascript_alerts
+    Step 02 - Click vào button: Click for JS Confirm
+    Step 03 - Verify message hiển thị trong alert là: I am a JS Confirm
+    Step 04 - Cancel alert và verify message hiển thị tại Result là:  You clicked: Cancel
+     */
     @Test
-    public void testcaseAlert02(){
+    public void testcaseAlert02() {
         inputURL("http://the-internet.herokuapp.com/javascript_alerts");
 
         //Click vào button: Click for JS Confirm
@@ -69,15 +73,15 @@ Step 04 - Cancel alert và verify message hiển thị tại Result là:  You cl
         Assert.assertEquals(actualCancelMessage.trim(), "You clicked: Cancel");
     }
 
-/*
-Exercise 03: Tương tác với Alert Prompts
-Step 01 - Truy cập vào trang: http://the-internet.herokuapp.com/javascript_alerts
-Step 02 - Click vào button: Click for JS Prompt
-Step 03 - Verify message hiển thị trong alert là: I am a JS prompt
-Step 04 - Nhập vào text “VuNguyen”và verify message hiển thị tại Result là:  You entered: VuNguyen
- */
+    /*
+    Exercise 03: Tương tác với Alert Prompts
+    Step 01 - Truy cập vào trang: http://the-internet.herokuapp.com/javascript_alerts
+    Step 02 - Click vào button: Click for JS Prompt
+    Step 03 - Verify message hiển thị trong alert là: I am a JS prompt
+    Step 04 - Nhập vào text “VuNguyen”và verify message hiển thị tại Result là:  You entered: VuNguyen
+     */
     @Test
-    public void testcaseAlert03(){
+    public void testcaseAlert03() {
         inputURL("http://the-internet.herokuapp.com/javascript_alerts");
 
         //Click vào button: Click for JS Prompt
@@ -100,7 +104,7 @@ Step 04 - Nhập vào text “VuNguyen”và verify message hiển thị tại R
     }
 
     @AfterClass
-    public void afterTestcaseAlert(){
+    public void afterTestcaseAlert() {
         driver.quit();
     }
 }

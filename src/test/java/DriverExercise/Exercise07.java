@@ -1,6 +1,10 @@
 package DriverExercise;
-import org.openqa.selenium.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,7 +23,7 @@ public class Exercise07 extends Common {
         loadBrowser();
     }
 
-//Upload ảnh bằng Sendkeys
+    //Upload ảnh bằng Sendkeys
 /*
 Exercise 1:
 Step 1: Vào trang: http://demo.guru99.com/test/upload/
@@ -40,32 +44,35 @@ Step 5: Verify message “1 file has been successfully uploaded.” được hi�
         String pathImage = rootPath.concat(pathDataImage).concat(fileName);
 
         WebElement browseBtn = driver.findElement(By.xpath("//input[@id='uploadfile_0']"));
+        waitForElement(10, "//input[@id='uploadfile_0']");
         browseBtn.sendKeys(pathImage);
 
         //Check checkbox: I accept terms of service
         WebElement termsCheckbox = driver.findElement(By.xpath("//input[@id='terms']"));
+        waitForElement(10, "//input[@id='terms']");
         termsCheckbox.click();
 
         //Click button Submit File
         WebElement submitFileBtn = driver.findElement(By.xpath("//button[@id='submitbutton']"));
+        waitForElement(10, "//button[@id='submitbutton']");
         submitFileBtn.click();
 
         //Verify message “1 file has been successfully uploaded.” được hiển thị
-        Thread.sleep(1500);
         WebElement successMessage = driver.findElement(By.xpath("//h3[@id='res']"));
+        waitForElement(10, "//h3[@id='res']");
         String actualSuccessMessage = successMessage.getText();
         Assert.assertEquals(actualSuccessMessage.trim(), "1 file\nhas been successfully uploaded.");
     }
 
-/*
-Exercise 2:
-Step 1: Vào trang: http://the-internet.herokuapp.com/upload
-Step 2: Upload file
-Step 3: Click button: Upload
-Step 4: Verify message “File Uploaded!” và file bên dưới vừa upload được hiển thị
- */
+    /*
+    Exercise 2:
+    Step 1: Vào trang: http://the-internet.herokuapp.com/upload
+    Step 2: Upload file
+    Step 3: Click button: Upload
+    Step 4: Verify message “File Uploaded!” và file bên dưới vừa upload được hiển thị
+     */
     @Test
-    public void testcaseUploadFileBySendKeys02(){
+    public void testcaseUploadFileBySendKeys02() {
         //Vào trang: http://the-internet.herokuapp.com/upload
         inputURL("http://the-internet.herokuapp.com/upload");
 
@@ -85,7 +92,7 @@ Step 4: Verify message “File Uploaded!” và file bên dưới vừa upload �
         //Verify message “File Uploaded!”
         WebElement successMessage = driver.findElement(By.xpath("//div[@class='example']/h3"));
         String actualSuccessMessage = successMessage.getText();
-        Assert.assertEquals(actualSuccessMessage.trim(),"File Uploaded!");
+        Assert.assertEquals(actualSuccessMessage.trim(), "File Uploaded!");
 
         //Verify file bên dưới vừa upload được hiển thị
         WebElement fileNameUploadded = driver.findElement(By.xpath("//div[@id='uploaded-files']"));
@@ -120,7 +127,6 @@ Step 5: Verify message “1 file has been successfully uploaded.” được hi�
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(absoluteFilePath, null);
 
         Robot robot = new Robot();
-//        Thread.sleep(1500);
 
         //Paste absolute File path to pop-up
         robot.keyPress(KeyEvent.VK_CONTROL);
@@ -139,17 +145,23 @@ Step 5: Verify message “1 file has been successfully uploaded.” được hi�
 
         //Click button Submit File
         WebElement submitFileBtn = driver.findElement(By.xpath("//button[@id='submitbutton']"));
+        waitForElement(10, "//button[@id='submitbutton']");
         submitFileBtn.click();
 
         //Verify message “1 file has been successfully uploaded.” được hiển thị
-        Thread.sleep(1500);
         WebElement successMessage = driver.findElement(By.xpath("//h3[@id='res']"));
+        waitForElement(10, "//h3[@id='res']");
         String actualSuccessMessage = successMessage.getText();
         Assert.assertEquals(actualSuccessMessage.trim(), "1 file\nhas been successfully uploaded.");
     }
 
+    public void waitForElement(int seconds, String waitConditionLocator) {
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(waitConditionLocator)));
+    }
+
     @AfterClass
-    public void afterTestcase(){
+    public void afterTestcase() {
         driver.quit();
     }
 }

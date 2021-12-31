@@ -5,6 +5,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -40,12 +42,13 @@ public class Exercise03 {
     public void testcase01() throws InterruptedException {
         //Find and click on Check Box on Navigation
         WebElement checkBoxNavigation = driver.findElement(By.xpath("//span[text()='Check Box']"));
+        waitForElement(10, "//span[text()='Check Box']");
         checkBoxNavigation.click();
 
         //Check checkbox Home is displayed?
         WebElement homeCheckBox = driver.findElement(By.xpath("//span[text()='Home']"));
+        waitForElement(10, "//span[text()='Home']");
         Assert.assertTrue(homeCheckBox.isDisplayed());
-
         homeCheckBox.click();
 
         //Check message below
@@ -60,17 +63,18 @@ public class Exercise03 {
         String successMessage = "You have selected : home desktop notes commands documents workspace react " +
                 "angular veu office public private classified general downloads wordFile excelFile";
         Assert.assertEquals(actualSuccessMessage.trim(), successMessage);
-        Thread.sleep(1500);
 
         //Find element Radio Box trên Navigation bar
         WebElement radioButton = driver.findElement(By.xpath("//span[text()='Radio Button']"));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        waitForElement(10, "//span[text()='Radio Button']");
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", radioButton);
 
         Assert.assertTrue(radioButton.isDisplayed());
 
         //Check content của trang Radio
         WebElement radioButtonText = driver.findElement(By.xpath("//div[text()='Do you like the site?']"));
+        waitForElement(10, "//div[text()='Do you like the site?']");
         String radioQuestion = radioButtonText.getText();
         Assert.assertEquals(radioQuestion, "Do you like the site?");
 
@@ -84,7 +88,7 @@ public class Exercise03 {
         WebElement successMessageYes = driver.findElement(By.xpath("//p[text()='You have selected ']"));
         String messageYes = successMessageYes.getText().trim();
         Assert.assertEquals(messageYes, "You have selected Yes");
-        Thread.sleep(1500);
+        waitForElement(15, "//p[text()='You have selected ']");
 
         //Check checkbox Impressive is displayed
         WebElement checkboxImpressive = driver.findElement(By.xpath("//label[@for='impressiveRadio']"));
@@ -96,7 +100,7 @@ public class Exercise03 {
         WebElement successMessageImpressive = driver.findElement(By.xpath("//p[text()='You have selected ']"));
         String messageImpressive = successMessageImpressive.getText().trim();
         Assert.assertEquals(messageImpressive, "You have selected Impressive");
-        Thread.sleep(1500);
+        waitForElement(20, "//p[text()='You have selected ']");
 
         //Check checkbox No is NOT enabled
         WebElement checkboxNo = driver.findElement(By.xpath("//input[@id='noRadio']"));
@@ -110,5 +114,10 @@ public class Exercise03 {
 
     public int randomNumber() {
         return (int) (Math.random() * 1000000 + 1);
+    }
+
+    public void waitForElement(int seconds, String waitConditionLocator) {
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(waitConditionLocator)));
     }
 }
