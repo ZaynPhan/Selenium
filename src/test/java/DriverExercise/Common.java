@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Set;
 
 public class Common {
-    WebDriver driver;
+    public WebDriver driver;
     public void loadBrowser(){
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/Driver/chromedriver.exe");
         driver = new ChromeDriver();

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite">
+    <test name=" Login01">
+        <parameter name="validUsername" value="mngr380444"/>
+        <parameter name="validPassword" value="bYpUryg"/>
+        <parameter name="invalidUsername" value="mngr109860"/>
+        <parameter name="invalidPassword" value="taqYsyd"/>
+        <classes>
+            <class name="testng.Exercise03"/>
+        </classes>
+    </test>
+    <test name="Login02">
+        <parameter name="validUsername" value="mngr380446"/>
+        <parameter name="validPassword" value="sygUhub"/>
+        <parameter name="invalidUsername" value="mngr109861"/>
+        <parameter name="invalidPassword" value="UzahajY"/>
+        <classes>
+            <class name="testng.Exercise03"/>
+        </classes>
+    </test>
+</suite>

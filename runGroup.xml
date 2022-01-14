@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite">
+    <test name="Login successfully">
+        <groups>
+            <run>
+                <include name="loginSuccess"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="testng.Exercise02"/>
+        </classes>
+    </test>
+    <test name="Login failed">
+        <groups>
+            <run>
+                <include name="loginFail"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="testng.Exercise02"/>
+        </classes>
+    </test>
+</suite>
